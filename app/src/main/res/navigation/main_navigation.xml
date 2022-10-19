@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.bandasdb.Fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_bandsFragment"
+            app:destination="@id/bandsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_musiciansFragment"
+            app:destination="@id/musiciansFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/musiciansFragment"
+        android:name="com.example.bandasdb.Fragments.MusiciansFragment"
+        android:label="fragment_musicians"
+        tools:layout="@layout/fragment_musicians" >
+        <action
+            android:id="@+id/action_musiciansFragment_to_newMusicianFragment"
+            app:destination="@id/newMusicianFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bandsFragment"
+        android:name="com.example.bandasdb.Fragments.BandsFragment"
+        android:label="BandsFragment" >
+        <action
+            android:id="@+id/action_bandsFragment_to_newBandFragment"
+            app:destination="@id/newBandFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newBandFragment"
+        android:name="com.example.bandasdb.Fragments.NewBandFragment"
+        android:label="fragment_new_musician"
+        tools:layout="@layout/fragment_new_musician" />
+    <fragment
+        android:id="@+id/newMusicianFragment"
+        android:name="com.example.bandasdb.Fragments.NewMusicianFragment"
+        android:label="NewMusicianFragment" />
+</navigation>
