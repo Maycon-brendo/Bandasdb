@@ -16,7 +16,7 @@ import com.example.bandasdb.models.Musician
 )
 abstract class MetalDataBase : RoomDatabase() {
 
-    abstract fun BandDao(): BandDao
-    abstract fun MusicianDao(): MusicianDao
-    abstract fun BandMusicianDao(): BandMusicianDao
+    abstract fun bandDao(): BandDao
+    abstract fun musicianDao(): MusicianDao
+    abstract fun bandMusicianDao(): BandMusicianDao
 }

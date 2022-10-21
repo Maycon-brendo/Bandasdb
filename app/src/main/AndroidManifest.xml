@@ -4,6 +4,7 @@
     package="com.example.bandasdb">
 
     <application
+        android:name=".database.bandapplication.MetalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"

@@ -5,56 +5,106 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bandasdb.Fragments.adapters.BandListener
+import com.example.bandasdb.Fragments.adapters.BandsAdapter
 import com.example.bandasdb.R
+import com.example.bandasdb.databinding.FragmentBandsBinding
+import com.example.bandasdb.utils.nav
+import com.example.bandasdb.viewmodel.MainViewModel
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [BandsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BandsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    val viewModel: MainViewModel by activityViewModels()
+
+    private var _binding: FragmentBandsBinding? = null
+
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentBandsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        setup()
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+
+                // Use Collect para receber um StateFlow
+                // import kotlinx.coroutines.flow.collect
+                viewModel.bands.collect{
+                        bands ->
+                    adapter.submitList(bands)
+                    binding.rvBands.adapter = adapter
+                }
+
+            }
+        }
+
+
+
+    }
+
+    val adapter = BandsAdapter(
+        object : BandListener {
+            override fun onClick(posicao: Int) {
+                // pra fazer (evento de clique)
+            }
+
+        }
+    )
+
+    private fun setup() {
+        setupViews()
+        setupRecyclerView()
+        setupClickListeners()
+        setupObservers()
+    }
+
+    private fun setupRecyclerView() {
+        binding.rvBands.adapter = adapter
+        binding.rvBands.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+    }
+
+    private fun setupClickListeners() {
+        binding.fabAdd.setOnClickListener {
+            nav(R.id.action_bandsFragment_to_newBandFragment)
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bands, container, false)
+    private fun setupViews() {
+        getActivity()?.setTitle("Bands");
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BandsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BandsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setupObservers() {
+//        viewModel.listaTurmas.observe(viewLifecycleOwner){
+//            adapter.submitList(it)
+//            binding.rvTurmas.adapter = adapter
+//        }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

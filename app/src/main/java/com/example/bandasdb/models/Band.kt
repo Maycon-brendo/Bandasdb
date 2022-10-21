@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "Band")
-data class Band (
+data class Band(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id:Long = 0L,
@@ -17,5 +17,5 @@ data class Band (
     val genre:String = "",
 
     @ColumnInfo(name = "formation")
-    val formation:Long = 0L,
+    val formation: String = "",
 )
