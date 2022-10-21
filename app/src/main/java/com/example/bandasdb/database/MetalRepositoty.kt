@@ -3,6 +3,7 @@ package com.example.bandasdb.database
 import android.content.Context
 import androidx.room.Room
 import com.example.bandasdb.models.Band
+import com.example.bandasdb.models.Musician
 import kotlinx.coroutines.flow.Flow
 
 private const val DATABASE_NAME = "metal-db"
@@ -33,7 +34,13 @@ class MetalRepositoty private constructor(context: Context) {
 
     fun getAllBands(): Flow<List<Band>> = database.bandDao().getAll()
 
+    fun getAllMusicians(): Flow<List<Musician>> = database.musicianDao().getAll()
+
     fun insertBand(band: Band) {
         database.bandDao().insert(band)
+    }
+
+    fun insertMusician(musician: Musician) {
+        database.musicianDao().insert(musician)
     }
 }

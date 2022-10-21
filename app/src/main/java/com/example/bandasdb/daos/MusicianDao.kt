@@ -2,6 +2,7 @@ package com.example.bandasdb.daos
 
 import androidx.room.*
 import com.example.bandasdb.models.Musician
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -18,7 +19,7 @@ interface MusicianDao {
     fun delete(musician: Musician)
 
     @Query("SELECT * FROM Musician")
-    fun getAll(): List<Musician>
+    fun getAll() : Flow<List<Musician>>
 
     @Query("SELECT * FROM Musician Where id = :id")
     fun getById(id: Long): Musician

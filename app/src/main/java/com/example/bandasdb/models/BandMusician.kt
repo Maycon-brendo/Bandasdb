@@ -39,7 +39,7 @@ import androidx.room.PrimaryKey
 data class BandMusician(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Long,
+    val id: Long = 0L,
 
     @ColumnInfo(name = "bandId")
     val bandId: Long = 0L,

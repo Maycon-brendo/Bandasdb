@@ -37,7 +37,7 @@ class NewBandFragment : Fragment() {
     }
 
     private fun setupViews() {
-        getActivity()?.setTitle("Nova Turma");
+        getActivity()?.setTitle("New Musician");
     }
 
     private fun setupClickListeners() {
