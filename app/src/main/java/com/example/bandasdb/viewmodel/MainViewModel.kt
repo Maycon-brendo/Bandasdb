@@ -9,6 +9,7 @@ import com.example.bandasdb.database.MetalRepositoty
 import com.example.bandasdb.models.Band
 import com.example.bandasdb.models.BandMusician
 import com.example.bandasdb.models.Musician
+import com.example.bandasdb.utils.saveLoginToSharedPrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -205,5 +206,12 @@ class MainViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    ////////////////////save name////////////////////////////
+
+
+    fun setinputyourname(){
+
     }
 }

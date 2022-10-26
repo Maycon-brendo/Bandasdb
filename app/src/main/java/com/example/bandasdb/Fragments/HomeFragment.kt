@@ -46,6 +46,9 @@ class HomeFragment : Fragment() {
             btnMusicians.setOnClickListener {
                 nav(R.id.action_homeFragment_to_musiciansFragment)
             }
+            fabSettings.setOnClickListener {
+                nav(R.id.action_homeFragment_to_settingsActivity)
+            }
         }
     }
 

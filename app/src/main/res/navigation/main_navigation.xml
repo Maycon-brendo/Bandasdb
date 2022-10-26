@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_musiciansFragment"
             app:destination="@id/musiciansFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
     </fragment>
     <fragment
         android:id="@+id/musiciansFragment"
@@ -59,4 +62,9 @@
         android:id="@+id/editMusiciansBandFragment"
         android:name="com.rafaelleal.android.turmasdatabaseproject.Fragments.EditMusiciansBandFragment"
         android:label="EditMusiciansBandFragment" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.example.bandasdb.SettingsActivity"
+        android:label="activity_settings"
+        tools:layout="@layout/activity_settings" />
 </navigation>
