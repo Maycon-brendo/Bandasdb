@@ -30,8 +30,9 @@ class BandsAdapter(val listener: BandListener) :
     }
 
     /**
-     * ViewHolder: Fixa os dados do modelo no item da lista
+     * ViewHolder: set datas of model in item from list
      */
+
     class ViewHolder private constructor(
         val binding: BandListItemBinding,
         val listener: BandListener
@@ -41,6 +42,13 @@ class BandsAdapter(val listener: BandListener) :
                 bandName.text = item.name
                 bandFormation.text = item.formation.toString()
                 bandGenre.text = item.genre
+
+                ivDelete.setOnClickListener {
+                    listener.onDeleteClick(item)
+                }
+                ivEdit.setOnClickListener {
+                    listener.onEditClick(item)
+                }
             }
         }
 
@@ -54,7 +62,6 @@ class BandsAdapter(val listener: BandListener) :
             }
         }
     }
-
 }
 
 
@@ -73,5 +80,6 @@ class BandDiffCallback : DiffUtil.ItemCallback<Band>() {
 // implementar cliques:
 // Crie a interface e passe dentro do ViewHolder
 interface BandListener {
-    fun onClick(posicao: Int)
+    fun onEditClick(band: Band)
+    fun onDeleteClick(band:Band)
 }

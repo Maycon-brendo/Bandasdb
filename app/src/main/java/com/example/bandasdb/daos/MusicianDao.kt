@@ -24,4 +24,7 @@ interface MusicianDao {
     @Query("SELECT * FROM Musician Where id = :id")
     fun getById(id: Long): Musician
 
+    @Query("SELECT * FROM Musician WHERE name like :input")
+    fun getListByName(input: String): Flow<List<Musician>>
+
 }

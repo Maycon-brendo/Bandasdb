@@ -17,11 +17,15 @@ import com.example.bandasdb.Fragments.adapters.MusiciansAdapter
 import com.example.bandasdb.R
 import com.example.bandasdb.databinding.FragmentBandsBinding
 import com.example.bandasdb.databinding.FragmentMusiciansBinding
+import com.example.bandasdb.models.Musician
 import com.example.bandasdb.utils.nav
+import com.example.bandasdb.utils.toast
 import com.example.bandasdb.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 class MusiciansFragment : Fragment() {
+
+    val TAG = "Musician"
 
     val viewModel: MainViewModel by activityViewModels()
 
@@ -66,8 +70,15 @@ class MusiciansFragment : Fragment() {
 
     val adapter = MusiciansAdapter(
         object : MusicianListener {
-            override fun onClick(posicao: Int) {
-                // pra fazer (evento de clique)
+            override fun onEditClick(musician: Musician) {
+                //TODO("Not yet implemented")
+                toast("Editar")
+            }
+
+            override fun onDeleteClick(musician: Musician) {
+                //TODO("Not yet implemented")
+                toast("Apagar")
+                viewModel.deleteMusician(musician)
             }
 
         }
@@ -77,7 +88,6 @@ class MusiciansFragment : Fragment() {
         setupViews()
         setupRecyclerView()
         setupClickListeners()
-        setupObservers()
     }
 
     private fun setupObservers() {

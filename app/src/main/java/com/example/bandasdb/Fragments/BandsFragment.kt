@@ -14,11 +14,14 @@ import com.example.bandasdb.Fragments.adapters.BandListener
 import com.example.bandasdb.Fragments.adapters.BandsAdapter
 import com.example.bandasdb.R
 import com.example.bandasdb.databinding.FragmentBandsBinding
+import com.example.bandasdb.models.Band
 import com.example.bandasdb.utils.nav
 import com.example.bandasdb.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 class BandsFragment : Fragment() {
+
+    val TAG = "band"
 
     val viewModel: MainViewModel by activityViewModels()
 
@@ -47,8 +50,7 @@ class BandsFragment : Fragment() {
 
                 // Use Collect para receber um StateFlow
                 // import kotlinx.coroutines.flow.collect
-                viewModel.bands.collect{
-                        bands ->
+                viewModel.bands.collect { bands ->
                     adapter.submitList(bands)
                     binding.rvBands.adapter = adapter
                 }
@@ -57,15 +59,18 @@ class BandsFragment : Fragment() {
         }
 
 
-
     }
 
     val adapter = BandsAdapter(
         object : BandListener {
-            override fun onClick(posicao: Int) {
-                // pra fazer (evento de clique)
+            override fun onEditClick(band: Band) {
+                viewModel.setSelectedBandId(band.id)
+                nav(R.id.action_bandsFragment_to_editBandFragment)
             }
 
+            override fun onDeleteClick(band: Band) {
+                viewModel.deleteBand(band)
+            }
         }
     )
 
@@ -75,6 +80,7 @@ class BandsFragment : Fragment() {
         setupClickListeners()
         setupObservers()
     }
+
 
     private fun setupRecyclerView() {
         binding.rvBands.adapter = adapter

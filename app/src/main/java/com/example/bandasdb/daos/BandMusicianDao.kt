@@ -4,6 +4,7 @@ import com.example.bandasdb.models.BandMusician
 import androidx.room.*
 import com.example.bandasdb.models.Band
 import com.example.bandasdb.models.Musician
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -21,7 +22,7 @@ interface BandMusicianDao {
 
     // return all  Band Musicians
     @Query("SELECT * FROM BandMusician")
-    fun getAll(): List<BandMusician>
+    fun getAll(): Flow<List<BandMusician>>
 
     // Retorna item da tabela onde o id é o requisitado
     @Query("SELECT * FROM BandMusician Where id = :id")
@@ -37,9 +38,12 @@ interface BandMusicianDao {
 
     // Retorna musicos de banda
     @Query("SELECT * FROM Musician WHERE EXISTS (SELECT * FROM BandMusician WHERE BandMusician.musicianId = Musician.id AND BandMusician.bandId = :bandId )")
-    fun getAMusiciansFromBand(bandId: Long): List<Musician>
+    fun getMusiciansFromBand(bandId: Long): Flow<List<Musician>>
 
     // retorna bandas do musico
     @Query("SELECT * FROM Band WHERE EXISTS (SELECT * FROM BandMusician WHERE BandMusician.bandId = Band.id AND BandMusician.musicianId = :musicianId )")
     fun getBandsFromMusician(musicianId: Long): List<Band>
+
+    @Query("SELECT * FROM BandMusician WHERE bandId = :bandId AND musicianId = :musicianId")
+    fun getByBandIdAndMusicianId(bandId: Long, musicianId: Long): BandMusician
 }

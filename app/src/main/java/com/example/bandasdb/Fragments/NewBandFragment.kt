@@ -64,6 +64,14 @@ class NewBandFragment : Fragment() {
         )
     }
 
+    fun clearInputs() {
+        binding.apply {
+            inputFormationYear.text?.clear()
+            inputNameBand.text?.clear()
+            inputGenre.text?.clear()
+        }
+    }
+
     fun validateInput(): Boolean {
 
         // ainda fazer validação

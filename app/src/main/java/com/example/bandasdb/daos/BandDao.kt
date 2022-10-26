@@ -2,6 +2,7 @@ package com.example.bandasdb.daos
 
 import androidx.room.*
 import com.example.bandasdb.models.Band
+import com.example.bandasdb.models.Musician
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -39,4 +40,7 @@ interface BandDao {
 
     @Query("SELECT * FROM Band Where id = :id")
     fun getById(id: Long) : Band
+
+    @Query("SELECT * FROM Band WHERE name like :input")
+    fun getListByName(input: String): Flow<List<Band>>
 }

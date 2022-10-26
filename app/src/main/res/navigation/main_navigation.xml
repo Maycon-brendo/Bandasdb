@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_bandsFragment_to_newBandFragment"
             app:destination="@id/newBandFragment" />
+        <action
+            android:id="@+id/action_bandsFragment_to_editBandFragment"
+            app:destination="@id/editBandFragment" />
     </fragment>
     <fragment
         android:id="@+id/newBandFragment"
@@ -43,4 +46,18 @@
         android:id="@+id/newMusicianFragment"
         android:name="com.example.bandasdb.Fragments.NewMusicianFragment"
         android:label="NewMusicianFragment" />
+    <fragment
+        android:id="@+id/editBandFragment"
+        android:name="com.example.bandasdb.Fragments.EditBandFragment"
+        android:label="fragment_edit_band"
+        tools:layout="@layout/fragment_edit_band" >
+        <action
+            android:id="@+id/action_editBandFragment_to_editMusiciansBandFragment"
+            app:destination="@id/editMusiciansBandFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editMusiciansBandFragment"
+        android:name="com.example.bandasdb.Fragments.EditMusiciansBandFragment"
+        android:label="fragment_edit_musicians_band"
+        tools:layout="@layout/fragment_edit_musicians_band" />
 </navigation>
