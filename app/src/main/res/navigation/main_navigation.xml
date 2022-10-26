@@ -57,7 +57,6 @@
     </fragment>
     <fragment
         android:id="@+id/editMusiciansBandFragment"
-        android:name="com.example.bandasdb.Fragments.EditMusiciansBandFragment"
-        android:label="fragment_edit_musicians_band"
-        tools:layout="@layout/fragment_edit_musicians_band" />
+        android:name="com.rafaelleal.android.turmasdatabaseproject.Fragments.EditMusiciansBandFragment"
+        android:label="EditMusiciansBandFragment" />
 </navigation>
