@@ -1,4 +1,4 @@
-package com.rafaelleal.android.turmasdatabaseproject.Fragments
+package com.example.bandasdb.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
